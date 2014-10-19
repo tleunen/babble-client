@@ -1,3 +1,4 @@
+"use strict";
 
 var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
 var UserStorageUtils = require('../utils/UserStorageUtils');
