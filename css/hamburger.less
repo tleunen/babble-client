@@ -1,0 +1,64 @@
+/**
+ * Taken from http://sarasoueidan.com/blog/navicon-transformicons/
+ * And slightly modified
+ */
+
+@button-size: 2rem;
+
+.line() {
+    display: block;
+    width: @button-size;
+    height: @button-size/7;
+    background: #ecf0f1;
+    border-radius: @button-size/14;
+}
+
+.hamburger-icon {
+    /* reset default button style */
+    border: none;
+    background: none;
+
+    /* custom styles */
+    padding: @button-size/2 @button-size/4;
+    cursor: pointer;
+    border-radius: @button-size/7;
+
+    .lines {
+        .line();
+        position: relative;
+        transition: background .3s .6s ease;
+
+        /* Upper/Lower lines */
+        &:before, &:after {
+            content: '';
+            .line();
+            position: absolute;
+            top: @button-size/4;
+            left:0;
+            //set transform origin back to center
+            transform-origin: 50% 50%;
+            transition: top .3s .6s ease, transform .3s ease;
+        }
+        &:after { top: -@button-size/4; }
+    }
+
+
+    /* Special styles for the close button */
+    &.close {
+        .lines{
+            background: transparent;
+            transition: background .3s 0s ease;
+
+            /* overlay the lines + rotation */
+            &:before, &:after{
+                top:0;
+                width: @button-size;
+                transform: rotate3d(0,0,1,45deg);
+                transition: top .3s ease, transform .3s .5s ease;
+            }
+            &:after{
+                transform: rotate3d(0,0,1,-45deg);
+            }
+        }
+    }
+}

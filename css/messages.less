@@ -1,0 +1,46 @@
+@import 'constants.less';
+
+.messageList {
+    list-style: none;
+    padding: 5px 65px 45px 5px;
+    word-wrap: break-word;
+    font-size: 0.75em;
+}
+
+.messageItem {
+
+    &:first-child {
+        color: @color_welcome;
+        font: bold 14px Century Gothic, STHeitiTC-Medium, Sans-Serif;
+    }
+
+    &.join {
+        color: #252;
+        font-style: italic;
+    }
+
+    &.left {
+        color: #522;
+        font-style: italic;
+    }
+}
+
+.messageTime {
+    color: @color_link;
+    display: inline-block;
+}
+.messageAuthor {
+    color: @color_nickname;
+    font-weight: bold;
+    padding: 0 5px;
+    display: inline-block;
+}
+.messageText {
+    display: inline-block;
+    a {
+        color: @color_link;
+        &:hover {
+            color: @color_link_hover;
+        }
+    }
+}

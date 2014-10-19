@@ -1,0 +1,54 @@
+@import 'constants.less';
+
+.userSection {
+    @w: 200px;
+
+
+    background: @color_bg;
+    box-shadow: -3px 0 15px @color_shadow;
+    width: @w;
+    height: 100%;
+    position: absolute;
+    right: -@w;
+    top: 0;
+    transition: transform 1s ease;
+
+    &.opened {
+        transform: translateX(-@w);
+    }
+
+
+    h2 {
+        text-align: center;
+        width: 135px;
+        height: 30px;
+        margin: 25px 0 0;
+        padding: 0;
+        line-height: 30px;
+    }
+}
+
+.userList {
+    margin: 20px 0 0;
+    padding: 0 0 135px;
+    text-align: center;
+    font-size: 0.875em;
+    list-style: none;
+    display: block;
+    height: 100%;
+    overflow: auto;
+
+    .userItem {
+        width: 100%;
+        padding: 5px 0 5px 0;
+        margin: 0;
+        word-wrap: break-word;
+
+        &:hover{
+            background-color: @color_nickname;
+            color: @color_bg;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}

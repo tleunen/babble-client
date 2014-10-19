@@ -13,7 +13,8 @@ var UsernameSection = React.createClass({
     getInitialState: function() {
         return {
             username: UserStore.getUsername(),
-            isAuthenticated: UserStore.isAuthenticated(),
+            gotResponse: false,
+            isAuthenticated: false,
             alreadySubmitted: false
         };
     },
@@ -28,6 +29,7 @@ var UsernameSection = React.createClass({
 
     _onChange: function() {
         this.setState({
+            gotResponse: true,
             username: UserStore.getUsername(),
             isAuthenticated: UserStore.isAuthenticated()
         });
@@ -55,7 +57,7 @@ var UsernameSection = React.createClass({
     render: function() {
         var errorMessage;
 
-        if(this.state.alreadySubmitted && !this.state.isAuthenticated) {
+        if(this.state.gotResponse && !this.state.isAuthenticated) {
             errorMessage = <span className="usernameError">The username is not available</span>;
         }
 

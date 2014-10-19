@@ -3,6 +3,7 @@
  */
 "use strict";
 
+var Navigation = require('./Navigation');
 var MessageSection = require('./MessageSection');
 var MessageComposer = require('./MessageComposer');
 var UsernameSection = require('./UsernameSection');
@@ -40,6 +41,7 @@ var ChatApp = React.createClass({
 
         return (
           <div className="chatapp">
+            <Navigation />
             <MessageSection />
             <MessageComposer />
             {usernameSection}

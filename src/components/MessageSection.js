@@ -33,7 +33,7 @@ var MessageSection = React.createClass({
 
     _scrollToBottom: function() {
         var ul = this.refs.messageList.getDOMNode();
-        ul.scrollTop = ul.scrollHeight;
+        window.scrollTo(0, ul.scrollHeight);
     },
 
     /**

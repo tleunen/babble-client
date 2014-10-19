@@ -52,13 +52,23 @@ UserStore.dispatchToken = ChatAppDispatcher.register(function(payload) {
             UserStore.emitChange();
         break;
 
-        case ActionTypes.RECEIVE_ADD_USER:
-            _users.push(action.username);
+        case ActionTypes.RECEIVE_USER_LIST:
+            action.userList.forEach(function(user) {
+                _users.push(user);
+            });
             UserStore.emitChange();
         break;
 
-        case ActionTypes.RECEIVE_REMOVE_USER:
-            //_users.push(action.username);
+        case ActionTypes.RECEIVE_JOIN_MESSAGE:
+            _users.push(action.rawMessage.user);
+            UserStore.emitChange();
+        break;
+
+        case ActionTypes.RECEIVE_LEFT_MESSAGE:
+            var idx = _users.indexOf(action.rawMessage.user);
+            if(idx > -1) {
+                _users.splice(idx, 1);
+            }
             UserStore.emitChange();
         break;
 

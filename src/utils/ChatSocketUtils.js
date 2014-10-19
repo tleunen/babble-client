@@ -18,29 +18,26 @@ module.exports = {
                 ChatServerActionCreators.receiveRawMessage(data);
             });
 
+            socket.on('send:history', function(history) {
+                history.forEach(function(rawMsg) {
+                    ChatServerActionCreators.receiveRawMessage(rawMsg);
+                });
+            });
+
+            socket.on('user:list', function(userList) {
+                ChatServerActionCreators.receiveUserList(userList);
+            });
+            socket.on('user:join', function(data) {
+                ChatServerActionCreators.receiveJoinMessage(data);
+            });
+            socket.on('user:left', function(data) {
+                ChatServerActionCreators.receiveLeftMessage(data);
+            });
+
             socket.on('disconnect', function(){
                 console.log('Disconnected from socket:', url);
             });
         });
-
-
-        // // simulate welcome message
-        // var welcomeMsg = {
-        //     type: 'welcome',
-        //     time: Date.now(),
-        //     user: 'babble',
-        //     msg: '..:Bienvenue sur le chat π jutoba.com:..'
-        // };
-        // ChatServerActionCreators.receiveRawMessage(welcomeMsg);
-
-        // var usernameMsg = {
-        //     type: 'server',
-        //     time: Date.now(),
-        //     user: 'babble',
-        //     msg: 'Please enter your username.'
-        // };
-        // ChatServerActionCreators.receiveRawMessage(usernameMsg);
-
     },
 
 

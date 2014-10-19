@@ -12,6 +12,8 @@ var React = require('react/addons');
 window.React = React;
 
 ChatSocketUtils.init('localhost:9090');
+//ChatSocketUtils.init('http://babble-server-demo.herokuapp.com:80');
+
 UserStorageUtils.findUsername();
 
 React.renderComponent(

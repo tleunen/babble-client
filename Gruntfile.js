@@ -1,5 +1,7 @@
 'use strict';
 
+var collapse = require('bundle-collapser/plugin');
+
 module.exports = function(grunt) {
 
     // load dependancies
@@ -56,6 +58,18 @@ module.exports = function(grunt) {
         },
 
         browserify: {
+            libs: {
+                files: {
+                    "dist/libs.js": []
+                },
+                options: {
+                    alias: [
+                        './libs/reactjs-0.11.2:react/addons',
+                        './libs/socket.io-1.1.0:socket.io-client'
+                    ]
+                }
+            },
+
             watch: {
                 src: 'src/app.js',
                 dest: "dist/babble.js",
@@ -64,7 +78,8 @@ module.exports = function(grunt) {
                     browserifyOptions : {
                         debug: true
                     },
-                    transform: ['reactify',]
+                    transform: ['reactify',],
+                    external: "<%= browserify.libs.options.alias %>"
                 }
             },
 
@@ -72,15 +87,20 @@ module.exports = function(grunt) {
                 src: 'src/app.js',
                 dest: "dist/babble.js",
                 options: {
-                    transform: ['reactify',]
+                    transform: [
+                        'reactify',
+                        ['uglifyify', {global:true}]
+                    ],
+                    plugin: [collapse,],
+                    external: "<%= browserify.libs.options.alias %>"
                 }
             }
         }
 
     });
 
-    grunt.registerTask('build', ['browserify:all', 'less']);
-    grunt.registerTask('buildWatch', ['browserify:watch', 'less']);
+    grunt.registerTask('build', ['browserify:libs', 'browserify:all', 'less']);
+    grunt.registerTask('buildWatch', ['browserify:libs', 'browserify:watch', 'less']);
 
     grunt.registerTask("dev", ["buildWatch", "connect", "watch"])
     grunt.registerTask('default', ['build']);

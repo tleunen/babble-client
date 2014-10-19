@@ -2,7 +2,6 @@
 
 var ChatAppDispatcher = require('../dispatcher/ChatAppDispatcher');
 var ChatConstants = require('../constants/ChatConstants');
-//var ChatMessageUtils = require('../utils/ChatMessageUtils');
 var EventEmitter = require('events').EventEmitter;
 var merge = require('react/lib/merge');
 
@@ -31,9 +30,9 @@ var MessageStore = merge(EventEmitter.prototype, {
         return _messages;
     },
 
-    convertRawMessage: function(rawMessage) {
+    convertRawMessage: function(type, rawMessage) {
         return {
-            type: rawMessage.type,
+            type: type,
             date: new Date(rawMessage.time),
             author: rawMessage.user,
             text: rawMessage.msg
@@ -48,17 +47,21 @@ MessageStore.dispatchToken = ChatAppDispatcher.register(function(payload) {
     switch(action.type) {
 
         case ActionTypes.RECEIVE_RAW_MESSAGE:
-            _messages.push(MessageStore.convertRawMessage(action.rawMessage));
+            _messages.push(MessageStore.convertRawMessage('message', action.rawMessage));
             MessageStore.emitChange();
         break;
 
-        /*
-        case ActionTypes.CREATE_MESSAGE:
-            var message = MessageStore.getCreatedMessageData(action.text);
-            _messages[message.id] = message;
+        case ActionTypes.RECEIVE_JOIN_MESSAGE:
+            action.rawMessage.msg = 'joins the chat.';
+            _messages.push(MessageStore.convertRawMessage('join', action.rawMessage));
             MessageStore.emitChange();
         break;
-        */
+
+        case ActionTypes.RECEIVE_LEFT_MESSAGE:
+            action.rawMessage.msg = 'left the chat.';
+            _messages.push(MessageStore.convertRawMessage('left', action.rawMessage));
+            MessageStore.emitChange();
+        break;
 
         default:
             // do nothing

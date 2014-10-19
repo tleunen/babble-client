@@ -1,25 +1,5 @@
-@color_bg: #222522;
-@color_text: #aaa;
+@import 'constants.less';
 
-@color_link: #0AB;
-@color_link_hover: #777;
-
-@color_connected: #252;
-@color_notconnected: #522;
-
-@color_nickname: #BA0;
-@color_welcome: #F91;
-
-@color_bg_input: #444;
-@color_shadow: #191919;
-
-@status_height: 30px;
-
-@userList_width: 150px;
-
-/*  --------------------------------------------------
-:: BABBLE
--------------------------------------------------- */
 *, *:after, *:before {
   box-sizing: border-box;
 }
@@ -34,193 +14,16 @@ body {
     color: @color_text;
 }
 
-
-.chatapp {
-    .messageList {
-        list-style: none;
-        padding: 5px;
-        word-wrap: break-word;
-        font-size: 0.75em;
-    }
-
-    .messageItem {
-        position: relative;
-
-        &:first-child {
-            color: @color_welcome;
-            font: bold 14px Century Gothic, STHeitiTC-Medium, Sans-Serif;
-        }
-
-        &.join {
-            color: @color_connected;
-            font-style: italic;
-        }
-
-        &.leave {
-            color: @color_notconnected;
-            font-style: italic;
-        }
-    }
-
-    .messageTime {
-        color: @color_link;
-        display: inline-block;
-    }
-    .messageAuthor {
-        color: @color_nickname;
-        font-weight: bold;
-        padding: 0 5px;
-        display: inline-block;
-    }
-    .messageText {
-        display: inline-block;
-        a {
-            color: @color_link;
-            &:hover {
-                color: @color_link_hover;
-            }
-        }
-    }
-
-    /*  --------------------------------------------------
-    :: BABBLE Form
-    -------------------------------------------------- */
-    .messageComposer {
-        position: fixed;
-        bottom: 0px;
-        left: 0px;
-        width: 100%;
-        height: 50px;
-        padding: 5px;
-        background: @color_bg;
-        box-shadow: 0px -3px 15px @color_shadow;
-
-        .textarea {
-            resize: none;
-            background: @color_bg_input;
-            color: @color_text;
-            width: 100%;
-            height: 40px;
-            padding: 5px;
-            font-weight: lighter;
-            border: 0;
-        }
-    }
-
-    /*  --------------------------------------------------
-    :: BABBLE username section
-    -------------------------------------------------- */
-    .usernameSection {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        background: @color_bg;
-        text-align: center;
-    }
-    .usernameForm {
-        margin-top: -100px;
-        position: absolute;
-        text-align: center;
-        top: 50%;
-        width: 100%;
-
-        .title {
-            font-size: 200%;
-        }
-        .usernameInput {
-            background-color: transparent;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            text-align: center;
-            width: 400px;
-            color: #fff;
-            font-size: 150%;
-            letter-spacing: 2px;
-        }
-        .usernameError {
-            position: absolute;
-            bottom: 50px;
-            left: 0;
-            width: 100%;
-            color: red;
-        }
-        .usernameBtn {
-            display: block;
-            margin: auto;
-            background: #aaa;
-            border: 0;
-            width: 150px;
-            height: 40px;
-            font-size: 150%;
-            margin-top: 40px;
-            cursor: pointer;
-        }
-    }
-}
-
-/*  --------------------------------------------------
-:: BABBLE Users
--------------------------------------------------- */
-
-.bblUsers {
-    position: fixed;
-    z-index: 0;
-    right: 0;
-    top: 0;
-    width: @userList_width;
-    height: 100%;
-    background: @color_bg_input;
-    box-shadow: -3px 0px 15px @color_shadow;
-}
-
-.bblUlist {
-    padding: @status_height+10px 0 0 0;
-    margin: 0;
-    text-align: center;
-    font-size: 0.875em;
-    list-style: none;
-
-    li {
-        width: 100%;
-        padding: 5px 0 5px 0;
-        margin: 0;
-
-        &:hover{
-            background-color: @color_nickname;
-            color: @color_bg;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    }
-}
-
-
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
-/*//////////////////////////////////////////////////////////////////*/
+@import 'messages.less';
+@import 'navigation.less';
+@import 'messageComposer.less';
+@import 'usernameSection.less';
 
 
 /* Desktops and laptops ----------- */
 @media screen
 and (min-width : 768px) {
-    .bblForm {
-        height: 50px;
-    }
 
-    .bblInput {
-        height: 40px;
-        padding: 10px;
-        font-size: .75em;
-    }
 }
 
 /* Large screens ----------- */
