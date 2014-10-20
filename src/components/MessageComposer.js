@@ -14,6 +14,17 @@ module.exports = React.createClass({
         return {text: ''};
     },
 
+    componentDidMount: function() {
+        var node = this.refs.textarea.getDOMNode();
+        window.onfocus = function() {
+            node.focus();
+        };
+    },
+
+    componentWillUnmount: function() {
+        window.onfocus = null;
+    },
+
     _onChange: function(event, value) {
         this.setState({text: event.target.value});
     },
@@ -33,8 +44,10 @@ module.exports = React.createClass({
         return (
             <div className="messageComposer">
                 <textarea
+                    ref="textarea"
                     className="textarea"
                     name="message"
+                    autoFocus
                     value={this.state.text}
                     onChange={this._onChange}
                     onKeyDown={this._onKeyDown}

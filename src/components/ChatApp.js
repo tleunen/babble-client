@@ -34,17 +34,21 @@ var ChatApp = React.createClass({
 
     render: function() {
 
-        var usernameSection;
-        if(!this.state.isAuthenticated) {
-            usernameSection = <UsernameSection />;
+        var content;
+        if(this.state.isAuthenticated) {
+            content = [
+                <Navigation />,
+                <MessageSection />,
+                <MessageComposer />
+            ];
+        }
+        else {
+            content = <UsernameSection />
         }
 
         return (
           <div className="chatapp">
-            <Navigation />
-            <MessageSection />
-            <MessageComposer />
-            {usernameSection}
+            {content}
           </div>
         );
     }
