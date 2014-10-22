@@ -3,8 +3,15 @@
  */
 "use strict";
 
+var Config = require('../config');
 var Autolinker = require( 'autolinker' );
 var React = require('react/addons');
+
+
+var AL = new Autolinker({
+    truncate: Config.URL_MAX_CHAR,
+    twitter: Config.TWITTER_HANDLE_AUTO_LINK
+});
 
 module.exports = React.createClass({
     propTypes: {
@@ -20,7 +27,7 @@ module.exports = React.createClass({
         };
         classes[message.type] = true;
 
-        var messageContent = Autolinker.link(message.text);
+        var messageContent = AL.link(message.text);
 
         return (
             <li className={cx(classes)}>
