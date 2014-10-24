@@ -31,9 +31,9 @@ module.exports = React.createClass({
 
         return (
             <li className={cx(classes)}>
-                <div className="messageTime">{message.date.toLocaleTimeString()}</div>
-                <div className="messageAuthor">{message.author}</div>
-                <div className="messageText" dangerouslySetInnerHTML={{__html: messageContent}} />
+                <span className="messageTime">{message.date.toLocaleTimeString()}</span>
+                <span className="messageAuthor">{message.author}</span>
+                <span className="messageText" dangerouslySetInnerHTML={{__html: messageContent}} />
             </li>
         );
     }
